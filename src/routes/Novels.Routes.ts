@@ -15,4 +15,10 @@ novelRouter.get('/get-list-novel-id', getListNovelController)
  * mothod: get
  */
 novelRouter.post('add-chapter-in-novel', addChapterController)
+/**
+ * Description. add a new chapter to novel
+ * path: /add-chapter-in-novel
+ * mothod: POST
+ * Body:{novelId:string,chapterName:string,chapterContent:string,chapterIndex:number}
+ */
 export default novelRouter
