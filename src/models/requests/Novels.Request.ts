@@ -5,15 +5,18 @@ export interface NovelRequestBody {
   descriptionImage: URL
   name: string
   category: ObjectId[]
+  descriptionURL: URL
+
   // object include category id
 }
 export enum NovelStatus {
+  upcoming,
   updating,
-  umcoming,
   full
 }
 export interface addChapterRequestBoby {
   novelID: string
   chapterNumber: number
-  content: string
+  chapterName: string
+  contentURL: URL
 }

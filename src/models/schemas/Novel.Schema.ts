@@ -2,7 +2,8 @@ import { ObjectId } from 'mongodb'
 import { NovelStatus } from '../requests/Novels.Request'
 
 interface NovelSType {
-  novelID: string
+  descriptionURL: URL
+  novelCode: string
   authorName: string
   Episodes?: number
   descriptionImage: URL
@@ -12,44 +13,44 @@ interface NovelSType {
   status?: NovelStatus
 }
 export class Novel {
-  private novelID: string
+  private descriptionURL: URL
+  private novelCode: string
   private authorName: string
   private Episodes: number
   private descriptionImage: URL | string
-  private name: string
+  private novelName: string
   private category: ObjectId[] | undefined
   private view: number
   private status: NovelStatus
-  private setNovelID(ID: string) {
-    this.novelID = ID
-  }
+  getNovelCode = () => this.novelCode
   constructor(novel: NovelSType) {
-    this.novelID = novel.novelID
+    this.descriptionURL = novel.descriptionURL
+    this.novelCode = novel.novelCode
     this.authorName = novel.authorName
     this.Episodes = 0
     this.descriptionImage = ''
-    this.name = novel.name
+    this.novelName = novel.name
     this.category = novel.category
     this.view = 0
-    this.status = NovelStatus.umcoming
+    this.status = NovelStatus.upcoming
   }
 }
 
 interface ChapterType {
   parentID: string
-  novelID: string
+  novelCode: string
   chapterNumber: number
-  content: string
+  contentURL: string
 }
-class Chapter {
+export class Chapter {
   private parentID: string
-  private novelID: string
+  private novelCode: string
   private chapterNumber: number
-  private content: string
+  private contentURL: string
   constructor(chapter: ChapterType) {
     this.parentID = chapter.parentID
-    this.novelID = chapter.novelID
+    this.novelCode = chapter.novelCode
     this.chapterNumber = chapter.chapterNumber
-    this.content = chapter.content
+    this.contentURL = chapter.contentURL
   }
 }

@@ -32,6 +32,9 @@ class DatabaseService {
       console.log('Cannot connect to database')
     }
   }
+  get NovelDB(): Db {
+    return this.novelDB
+  }
   get getUser(): Collection<User> {
     return this.userDB.collection(`${userCollectionName}`)
   }

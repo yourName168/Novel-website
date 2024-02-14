@@ -11,6 +11,6 @@ export const getListNovelController = async (req: Request, res: Response, next: 
 }
 
 export const addChapterController = async (req: Request, res: Response, next: NextFunction) => {
-  const result = await NovelService.getAllNovelId()
+  const result = await NovelService.addChapter(req.body)
   res.send(result)
 }
