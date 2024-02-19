@@ -14,3 +14,7 @@ export const addChapterController = async (req: Request, res: Response, next: Ne
   const result = await NovelService.addChapter(req.body)
   res.send(result)
 }
+export const getChapterController = async (req: Request, res: Response, next: NextFunction) => {
+  const result = await NovelService.getAllChapterOfNovel(req.body)
+  res.send(result)
+}

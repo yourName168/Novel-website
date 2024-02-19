@@ -16,7 +16,9 @@ export enum NovelStatus {
 }
 export interface addChapterRequestBoby {
   novelID: string
-  chapterNumber: number
   chapterName: string
   contentURL: URL
+}
+export interface getChapterRequestBody {
+  novelCode: string
 }
