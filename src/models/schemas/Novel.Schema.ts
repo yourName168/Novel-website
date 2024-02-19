@@ -14,7 +14,7 @@ interface NovelSType {
 }
 export class Novel {
   private descriptionURL: URL
-  private novelCode: string
+  novelCode: string
   private authorName: string
   private Episodes: number
   private descriptionImage: URL | string
@@ -22,13 +22,13 @@ export class Novel {
   private category: ObjectId[] | undefined
   private view: number
   private status: NovelStatus
-  getNovelCode = () => this.novelCode
+  public getNovelCode = () => this.novelCode
   constructor(novel: NovelSType) {
     this.descriptionURL = novel.descriptionURL
     this.novelCode = novel.novelCode
     this.authorName = novel.authorName
     this.Episodes = 0
-    this.descriptionImage = ''
+    this.descriptionImage = novel.descriptionImage
     this.novelName = novel.name
     this.category = novel.category
     this.view = 0
@@ -40,17 +40,20 @@ interface ChapterType {
   parentID: string
   novelCode: string
   chapterNumber: number
-  contentURL: string
+  contentURL: URL
+  chapterName: string
 }
 export class Chapter {
   private parentID: string
   private novelCode: string
   private chapterNumber: number
-  private contentURL: string
+  private contentURL: URL
+  private chapterName: string
   constructor(chapter: ChapterType) {
     this.parentID = chapter.parentID
     this.novelCode = chapter.novelCode
     this.chapterNumber = chapter.chapterNumber
     this.contentURL = chapter.contentURL
+    this.chapterName = chapter.chapterName
   }
 }

@@ -1,5 +1,10 @@
 import express from 'express'
-import { addChapterController, addNovelController, getListNovelController } from '~/controllers/Novels.Controller'
+import {
+  addChapterController,
+  addNovelController,
+  getChapterController,
+  getListNovelController
+} from '~/controllers/Novels.Controller'
 const novelRouter = express.Router()
 novelRouter.post('/add-novel', addNovelController)
 /**
@@ -14,11 +19,17 @@ novelRouter.get('/get-list-novel-id', getListNovelController)
  * path: /get-novel
  * mothod: get
  */
-novelRouter.post('add-chapter-in-novel', addChapterController)
+novelRouter.post('/add-chapter-in-novel', addChapterController)
 /**
  * Description. add a new chapter to novel
  * path: /add-chapter-in-novel
  * mothod: POST
  * Body:{novelId:string,chapterName:string,chapterContent:string,chapterIndex:number}
+ */
+novelRouter.get('/get-chapter-in-novel', getChapterController)
+/**
+ * Description. get all chapter from novel
+ * path: /get-chapter-in-novel
+ * mothod: get
  */
 export default novelRouter
