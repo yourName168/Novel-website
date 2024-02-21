@@ -21,6 +21,7 @@ class novelService {
     try {
       const result = await databaseService.getListNovel.find({}).toArray()
       console.log(result)
+      console.log('1')
       return result
     } catch (error) {
       console.error(error)
