@@ -10,6 +10,13 @@ class novelService {
       const novelCode = `novel-${maxNum}`
       const result = await collection.insertOne(new Novel({ ...payload, novelCode }))
       databaseService.NovelDB.createCollection(`${novelCode}`)
+      const categoryName = payload.category
+      try {
+        databaseService.getCategory.updateOne({ categoryName }, { $push: { novelId: result.insertedId } })
+      } catch {
+        databaseService.getCategory.insertOne({ categoryName, novelId: [result.insertedId] })
+      }
+
       return result
     } catch (error) {
       console.error(error)
@@ -21,6 +28,7 @@ class novelService {
     try {
       const result = await databaseService.getListNovel.find({}).toArray()
       console.log(result)
+      console.log('1')
       return result
     } catch (error) {
       console.error(error)
@@ -50,6 +58,43 @@ class novelService {
     try {
       const result = await databaseService.NovelDB.collection(`${payload.novelCode}`).find({}).toArray()
       console.log(result)
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+  increaseViewNovel = async (payload: { novelCode: string }) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const collection = databaseService.getListNovel
+      const result = await collection.updateOne({ novelCode: payload.novelCode }, { $inc: { view: 1 } })
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+  getListNovelSortedByView = async () => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const result = await databaseService.getListNovel.find({}).sort({ view: -1 }).toArray()
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+  getListNovelSortedAlphabetically = async () => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const result = await databaseService.getListNovel.find({}).sort({ novelName: 1 }).toArray()
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+  getListCategory = async () => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+      const result = await databaseService.getCategory.find({}).toArray()
       return result
     } catch (error) {
       throw error

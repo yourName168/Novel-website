@@ -10,6 +10,7 @@ const userDBName = process.env.USER_DATABASE_NAME
 const novelDBName = process.env.NOVEL_DATABASE_NAME
 const userCollectionName = process.env.DB_ACCOUNT_COLLECTION as string
 const listNovelName = process.env.DB_LIST_NOVEL_COLLECTION_NAME as string
+const catagoryCollectionName = process.env.DB_CATEGORY_COLLECTION_NAME as string
 
 const uri = `mongodb+srv://${databaseUserName}:${databasePassword}@useraccount.p0jlcj2.mongodb.net/?retryWrites=true&w=majority`
 
@@ -40,6 +41,9 @@ class DatabaseService {
   }
   get getListNovel(): Collection<Novel> {
     return this.novelDB.collection(`${listNovelName}`)
+  }
+  get getCategory() {
+    return this.novelDB.collection(`${catagoryCollectionName}`)
   }
 }
 export const databaseService = new DatabaseService()
