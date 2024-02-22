@@ -4,7 +4,7 @@ export interface NovelRequestBody {
   authorName: string
   descriptionImage: URL
   name: string
-  category: ObjectId[]
+  category: string[]
   descriptionURL: URL
 
   // object include category id

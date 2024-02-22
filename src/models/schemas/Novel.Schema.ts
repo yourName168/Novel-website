@@ -8,7 +8,7 @@ interface NovelSType {
   Episodes?: number
   descriptionImage: URL
   name: string
-  category?: ObjectId[]
+  category: string[]
   view?: number
   status?: NovelStatus
 }
@@ -19,7 +19,7 @@ export class Novel {
   private Episodes: number
   private descriptionImage: URL | string
   private novelName: string
-  private category: ObjectId[] | undefined
+  private category: string[]
   private view: number
   private status: NovelStatus
   public getNovelCode = () => this.novelCode

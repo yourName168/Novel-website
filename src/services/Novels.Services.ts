@@ -11,12 +11,22 @@ class novelService {
       const result = await collection.insertOne(new Novel({ ...payload, novelCode }))
       databaseService.NovelDB.createCollection(`${novelCode}`)
       const categoryName = payload.category
-      try {
-        databaseService.getCategory.updateOne({ categoryName }, { $push: { novelId: result.insertedId } })
-      } catch {
-        databaseService.getCategory.insertOne({ categoryName, novelId: [result.insertedId] })
-      }
-
+      categoryName.map(async (category) => {
+        const documentCategoryName = await databaseService.getCategory.findOne({ categoryName: category })
+        if (documentCategoryName) {
+          const res = await databaseService.getCategory.updateOne(
+            { categoryName: category },
+            { $push: { novelId: result.insertedId } }
+          )
+          console.log(res)
+        } else {
+          const res = await databaseService.getCategory.insertOne({
+            categoryName: category,
+            novelId: [result.insertedId]
+          })
+          console.log(res)
+        }
+      })
       return result
     } catch (error) {
       console.error(error)
@@ -43,7 +53,7 @@ class novelService {
       const novel = await databaseService.getListNovel.findOne({ _id: parentID })
       if (!novel) throw new Error('Novel not found')
       const novelCode = novel.novelCode
-      const novelColection = await databaseService.NovelDB.collection(`${novelCode}`)
+      const novelColection = databaseService.NovelDB.collection(`${novelCode}`)
       const maxNum = (await novelColection.countDocuments()) + 1
       const result = await novelColection.insertOne(
         new Chapter({ ...payload, parentID: parentID.toString(), novelCode, chapterNumber: maxNum })

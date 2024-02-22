@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 import e from 'cors'
->>>>>>> develop
 import { NextFunction, Request, Response } from 'express'
 import { NovelService } from '~/services/Novels.Services'
 
@@ -22,8 +19,6 @@ export const getChapterController = async (req: Request, res: Response, next: Ne
   const result = await NovelService.getAllChapterOfNovel(req.body)
   res.send(result)
 }
-<<<<<<< HEAD
-=======
 export const increaseViewNovelController = async (req: Request, res: Response, next: NextFunction) => {
   const result = await NovelService.increaseViewNovel(req.body)
   res.send(result)
@@ -40,4 +35,3 @@ export const getListCategoryController = async (req: Request, res: Response, nex
   const result = await NovelService.getListCategory()
   res.send(result)
 }
->>>>>>> develop
