@@ -1,9 +1,14 @@
 import express from 'express'
+import { get } from 'lodash'
 import {
   addChapterController,
   addNovelController,
   getChapterController,
-  getListNovelController
+  getListCategoryController,
+  getListNovelController,
+  getListNovelSortedAlphabeticallyController,
+  getListNovelSortedByViewController,
+  increaseViewNovelController
 } from '~/controllers/Novels.Controller'
 const novelRouter = express.Router()
 novelRouter.post('/add-novel', addNovelController)
@@ -30,6 +35,31 @@ novelRouter.get('/get-chapter-in-novel', getChapterController)
 /**
  * Description. get all chapter from novel
  * path: /get-chapter-in-novel
+ * mothod: get
+ */
+novelRouter.patch('/increase-view', increaseViewNovelController)
+/**
+ * Description. increase view of novel
+ * path: /increase-view
+ * mothod: PATCH
+ * Body:{novelCode:string}
+ */
+novelRouter.get('/get-novel-sorted-by-view', getListNovelSortedByViewController)
+/**
+ * Description. get all novel sorted by view
+ * path: /get-novel-sorted-by-view
+ * mothod: get
+ */
+novelRouter.get('/get-novel-sorted-alphabetically', getListNovelSortedAlphabeticallyController)
+/**
+ * Description. get all novel sorted alphabetically
+ * path: /get-novel-sorted-alphabetically
+ * mothod: get
+ */
+novelRouter.get('/get-all-category', getListCategoryController)
+/**
+ * Description. get all category
+ * path: /get-all-category
  * mothod: get
  */
 export default novelRouter

@@ -1,7 +1,21 @@
 {
+<<<<<<< HEAD
     "folders": [
         {
             "path": "../../node_modules"
         }
     ]
+=======
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../new app/demo_web_truyen"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "new app"
+	}
+>>>>>>> develop
 }
