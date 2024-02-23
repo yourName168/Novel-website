@@ -63,10 +63,10 @@ class novelService {
       throw error
     }
   }
-  getAllChapterOfNovel = async (payload: getChapterRequestBody) => {
+  getAllChapterOfNovel = async (novelCode: string) => {
     // eslint-disable-next-line no-useless-catch
     try {
-      const result = await databaseService.NovelDB.collection(`${payload.novelCode}`).find({}).toArray()
+      const result = await databaseService.NovelDB.collection(`${novelCode}`).find({}).toArray()
       console.log(result)
       return result
     } catch (error) {

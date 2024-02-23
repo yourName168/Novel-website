@@ -1,4 +1,3 @@
-import e from 'cors'
 import { NextFunction, Request, Response } from 'express'
 import { NovelService } from '~/services/Novels.Services'
 
@@ -16,7 +15,8 @@ export const addChapterController = async (req: Request, res: Response, next: Ne
   res.send(result)
 }
 export const getChapterController = async (req: Request, res: Response, next: NextFunction) => {
-  const result = await NovelService.getAllChapterOfNovel(req.body)
+  const novelCode = (await req.query.novelCode) as string
+  const result = await NovelService.getAllChapterOfNovel(novelCode)
   res.send(result)
 }
 export const increaseViewNovelController = async (req: Request, res: Response, next: NextFunction) => {
