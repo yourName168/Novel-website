@@ -1,8 +1,8 @@
 import cors from 'cors'
 import dotenv from 'dotenv'
 import express, { Express } from 'express'
-import userRoute from './routes/User.Routes'
 import novelRouter from './routes/Novels.Routes'
+import userRoute from './routes/User.Routes'
 import { databaseService } from './services/database.services'
 dotenv.config()
 
