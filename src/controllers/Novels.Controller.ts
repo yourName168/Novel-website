@@ -5,22 +5,24 @@ export const addNovelController = async (req: Request, res: Response, next: Next
   const result = await NovelService.addNovel(req.body)
   res.send(result)
 }
-export const getListNovelController = async (req: Request, res: Response, next: NextFunction) => {
-  const result = await NovelService.getAllNovelId()
+export const getListNovelByListIdController = async (req: Request, res: Response, next: NextFunction) => {
+  const listNovelId = req.query.listNovelId as string[]
+  const result = await NovelService.getListNovelByListId(listNovelId)
   res.send(result)
 }
 
-export const addChapterController = async (req: Request, res: Response, next: NextFunction) => {
-  const result = await NovelService.addChapter(req.body)
+export const addChapterOfNovelController = async (req: Request, res: Response, next: NextFunction) => {
+  const result = await NovelService.addChapterbyNovelId(req.body)
   res.send(result)
 }
-export const getChapterController = async (req: Request, res: Response, next: NextFunction) => {
-  const novelCode = (await req.query.novelCode) as string
+export const getChapterOfNovelController = async (req: Request, res: Response, next: NextFunction) => {
+  const novelCode = req.query.novelCode as string
   const result = await NovelService.getAllChapterOfNovel(novelCode)
   res.send(result)
 }
-export const increaseViewNovelController = async (req: Request, res: Response, next: NextFunction) => {
-  const result = await NovelService.increaseViewNovel(req.body)
+export const increaseNovelViewController = async (req: Request, res: Response, next: NextFunction) => {
+  const novelCode = req.body.novelCode as string
+  const result = await NovelService.increaseNovelView(novelCode)
   res.send(result)
 }
 export const getListNovelSortedByViewController = async (req: Request, res: Response, next: NextFunction) => {
@@ -32,6 +34,6 @@ export const getListNovelSortedAlphabeticallyController = async (req: Request, r
   res.send(result)
 }
 export const getListCategoryController = async (req: Request, res: Response, next: NextFunction) => {
-  const result = await NovelService.getListCategory()
+  const result = await NovelService.getAllCategory()
   res.send(result)
 }

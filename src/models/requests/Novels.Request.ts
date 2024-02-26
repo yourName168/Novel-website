@@ -1,5 +1,3 @@
-import { ObjectId } from 'mongodb'
-
 export interface NovelRequestBody {
   authorName: string
   descriptionImage: URL
@@ -21,4 +19,7 @@ export interface addChapterRequestBoby {
 }
 export interface getChapterRequestBody {
   novelCode: string
+}
+export interface getListNovelByListIdRequestBody {
+  listNovelId?: string[]
 }
