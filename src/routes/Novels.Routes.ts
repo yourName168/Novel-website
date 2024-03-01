@@ -11,26 +11,13 @@ import {
 } from '~/controllers/Novels.Controller'
 import { wrap } from '~/utils/handler'
 const novelRouter = express.Router()
-novelRouter.post('/add-novel', wrap(addNovelController))
-/**
- * Description. add a new novel to Database
- * path: /add-novel
- * mothod: POST
- * Body:{authorName:string,image:URL,name:string,category:object}
- */
+
 novelRouter.get('/get-list-novel-by-list-id', wrap(getListNovelByListIdController))
 /**
  * Description. get all novel from database
  * path: /get-novel
  * mothod: get
  * Query:{listNovelId?:string[]}
- */
-novelRouter.post('/add-chapter-in-novel', wrap(addChapterOfNovelController))
-/**
- * Description. add a new chapter to novel
- * path: /add-chapter-in-novel
- * mothod: POST
- * Body:{novelId:string,chapterName:string,chapterContent:string,chapterIndex:number}
  */
 novelRouter.get('/get-chapter-in-novel', wrap(getChapterOfNovelController))
 /**

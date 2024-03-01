@@ -4,6 +4,7 @@ import express, { Express } from 'express'
 import { defaultErrorHandler } from './middlewares/error.middlewares'
 import novelRouter from './routes/Novels.Routes'
 import userRoute from './routes/User.Routes'
+import adminRouter from './routes/Admin.Routes'
 import { databaseService } from './services/database.services'
 dotenv.config()
 
@@ -18,4 +19,5 @@ app.use(express.json())
 app.use(cors())
 app.use('/users', userRoute)
 app.use('/novels', novelRouter)
+app.use('/admin', adminRouter)
 app.use(defaultErrorHandler)

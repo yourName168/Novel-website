@@ -1,9 +1,5 @@
 import { ObjectId } from 'mongodb'
-import {
-  NovelRequestBody,
-  addChapterRequestBoby,
-  getListNovelByListIdRequestBody
-} from '~/models/requests/Novels.Request'
+import { NovelRequestBody, addChapterRequestBoby } from '~/models/requests/Novels.Request'
 import { Chapter, Novel } from '~/models/schemas/Novel.Schema'
 import { databaseService } from './database.services'
 class novelService {
@@ -31,22 +27,29 @@ class novelService {
     return result
   }
 
-  getListNovelByListId = async (listNovelId?: string[]) => {
+  getListNovelByListId = async (listNovelId?: string[] | string) => {
     if (!listNovelId) {
       const result = await databaseService.getListNovel.find({}).toArray()
       console.log(123)
       return result
     } else {
-      console.log(1234)
       const result: Novel[] = []
-      await Promise.all(
-        listNovelId.map(async (id) => {
-          const document = await databaseService.getListNovel.findOne({ _id: new ObjectId(id) })
+      if (typeof listNovelId === 'string') {
+        await databaseService.getListNovel.findOne({ _id: new ObjectId(listNovelId) }).then((document) => {
           if (document) {
             result.push(document as unknown as Novel)
           }
         })
-      )
+      } else {
+        await Promise.all(
+          listNovelId.map(async (id) => {
+            const document = await databaseService.getListNovel.findOne({ _id: new ObjectId(id) })
+            if (document) {
+              result.push(document as unknown as Novel)
+            }
+          })
+        )
+      }
       console.log(result)
       return result
     }

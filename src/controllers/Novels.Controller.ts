@@ -6,7 +6,7 @@ export const addNovelController = async (req: Request, res: Response, next: Next
   res.send(result)
 }
 export const getListNovelByListIdController = async (req: Request, res: Response, next: NextFunction) => {
-  const listNovelId = req.query.listNovelId as string[]
+  const listNovelId = req.query.listNovelId as string[] | string
   const result = await NovelService.getListNovelByListId(listNovelId)
   res.send(result)
 }
